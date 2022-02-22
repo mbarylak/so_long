@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 20:19:03 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/17 21:18:54 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/22 21:17:34 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,27 @@
 
 # define TILE 32
 
+typedef struct s_snake
+{
+	size_t			x;
+	size_t			y;
+	struct s_snake	*next;
+	struct s_snake	*prev;
+}	t_snake;
+
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	size_t	x;
-	size_t	y;
-	size_t	count;
-	size_t	height;
-	size_t	width;
-	size_t	apple;
+	void			*mlx;
+	void			*win;
+	char			**map;
+	size_t			x;
+	size_t			y;
+	struct s_snake	*snake;
+	size_t			count;
+	int				flag;
+	size_t			height;
+	size_t			width;
+	size_t			apple;
 }	t_vars;
 
 /* Map Tools */
@@ -46,8 +56,14 @@ void	ft_draw_map(char **map, t_vars *vars);
 void	ft_player(int x, int y, t_vars *vars);
 void	ft_opendagates(t_vars *vars);
 void	ft_checkmove(int keycode, t_vars *vars);
+void	ft_checkmove1(t_vars *vars);
 void	ft_move(int keycode, t_vars *vars);
 int		press_key(int keycode, t_vars *vars);
+t_snake	*ft_grow_snake(t_snake *snake);
+void	ft_move_snake(t_vars *vars);
+void	ft_move_snake_flag(t_vars *vars);
+void	ft_paint_head(int keycode, t_vars *vars);
+void	ft_paint_snake(int keycode, t_vars *vars);
 
 /* Error Mngt */
 
@@ -61,5 +77,11 @@ void	ft_checkmap2(t_vars *vars, int p);
 void	ft_checkmap3(t_vars *vars);
 void	ft_checkmap4(t_vars *vars);
 void	ft_checkmap(t_vars *vars);
+
+/* Lst Utils */
+
+t_snake	*ft_lstlast(t_snake *snake);
+void	ft_lstadd_back(t_snake **snake, t_snake *new);
+void	ft_swap(size_t	*x, size_t *y, size_t *i, size_t *j);
 
 #endif

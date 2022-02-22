@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:50:17 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/17 21:26:10 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/22 21:20:11 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	ft_error(int n)
 		printf("Invalid map input\n");
 		exit(1);
 	}
+	if (n == 1)
+	{
+		printf("You Lost\n");
+		exit(1);
+	}
 }
 
 t_vars	*ft_init(void)
@@ -26,11 +31,17 @@ t_vars	*ft_init(void)
 	t_vars	*vars;
 
 	vars = malloc(sizeof(t_vars));
+	vars->snake = (t_snake *)malloc(sizeof(t_snake));
 	vars->mlx = NULL;
 	vars->win = NULL;
 	vars->map = NULL;
 	vars->x = 0;
 	vars->y = 0;
+	vars->flag = 0;
+	vars->snake->x = 0;
+	vars->snake->y = 0;
+	vars->snake->next = NULL;
+	vars->snake->prev = NULL;
 	vars->count = 0;
 	vars->height = 0;
 	vars->width = 0;

@@ -6,14 +6,14 @@
 #    By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 17:07:28 by mbarylak          #+#    #+#              #
-#    Updated: 2022/02/14 19:11:57 by mbarylak         ###   ########.fr        #
+#    Updated: 2022/02/22 19:27:15 by mbarylak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 SRCS = make_map.c ./gnl/get_next_line.c so_long.c movement.c press_key.c \
-	   check_map.c
+	   check_map.c lstutils.c paint_snake.c
 
 OBJS = $(SRCS:.c=.o)
 

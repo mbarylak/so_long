@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:38:01 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/17 21:19:57 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:03:28 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_draw_tile(t_vars *vars, size_t x, size_t y, char *imgname)
 	j = (tile * y);
 	img = mlx_xpm_file_to_image(vars->mlx, imgname, &tile, &tile);
 	mlx_put_image_to_window(vars->mlx, vars->win, img, i, j);
+	mlx_destroy_image(vars->mlx, img);
 }
 
 void	ft_draw_map(char **map, t_vars *vars)

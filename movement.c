@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:40:59 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/17 21:20:41 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/22 21:22:34 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ void	ft_player(int x, int y, t_vars *vars)
 {
 	vars->x = x;
 	vars->y = y;
+	vars->snake->x = x;
+	vars->snake->y = y;
+	vars->snake->prev = NULL;
+	vars->snake->next = NULL;
 }
 
 void	ft_opendagates(t_vars *vars)
@@ -37,58 +41,71 @@ void	ft_opendagates(t_vars *vars)
 	}
 }
 
-void	ft_checkmove(int keycode, t_vars *vars)
+void	ft_move_snake(t_vars *vars)
 {
-	if (vars->map[vars->y][vars->x] == 'C')
-	{	
-		vars->map[vars->y][vars->x] = '0';
-		vars->apple -= 1;
-		if (vars->apple == 0)
-			ft_opendagates(vars);
+	t_snake	*init;
+	size_t	i;
+	size_t	j;
+
+	init = vars->snake;
+	while (vars->snake != NULL)
+	{
+		if (vars->snake->prev != NULL)
+		{
+			ft_swap(&vars->snake->x, &vars->snake->y, &i, &j);
+			//vars->snake->x = vars->snake->prev->x;
+			//vars->snake->y = vars->snake->prev->y;
+		}
+		else
+		{
+			i = vars->snake->x;
+			j = vars->snake->y;	
+		}
+		vars->snake = vars->snake->next;
 	}
-	else if (keycode == 13 && (vars->map[vars->y][vars->x] == '1' || \
-				(vars->map[vars->y][vars->x] == 'E' && ft_exit(vars) \
-				== 0)))
-		vars->y += 1;
-	else if (keycode == 1 && (vars->map[vars->y][vars->x] == '1' || \
-				(vars->map[vars->y][vars->x] == 'E' && ft_exit(vars) \
-				== 0)))
-		vars->y -= 1;
-	else if (keycode == 0 && (vars->map[vars->y][vars->x] == '1' || \
-				(vars->map[vars->y][vars->x] == 'E' && ft_exit(vars) \
-				== 0)))
-		vars->x += 1;
-	else if (keycode == 2 && (vars->map[vars->y][vars->x] == '1' || \
-				(vars->map[vars->y][vars->x] == 'E' && ft_exit(vars) \
-				== 0)))
-		vars->x -= 1;
+	vars->snake = init;
+	vars->snake->x = vars->x;
+	vars->snake->y = vars->y;
+}
+
+void	ft_move_snake_flag(t_vars *vars)
+{
+	t_snake	*init;
+	size_t	i;
+	size_t	j;
+
+	init = vars->snake;
+	while (vars->snake->next != NULL)
+	{
+		if (vars->snake->prev != NULL)
+		{
+			ft_swap(&vars->snake->x, &vars->snake->y, &i, &j);
+			//vars->snake->x = vars->snake->prev->x;
+			//vars->snake->y = vars->snake->prev->y;
+		}
+		else
+		{
+			i = vars->snake->x;
+			j = vars->snake->y;
+		}
+		vars->snake = vars->snake->next;
+	}
+	vars->snake = init;
+	vars->snake->x = vars->x;
+	vars->snake->y = vars->y;
 }
 
 void	ft_move(int keycode, t_vars *vars)
 {
-	ft_draw_tile(vars, vars->x, vars->y, "./sprites/floor_tile.xpm");
-	if (keycode == 0)
-	{	
-		vars->x -= 1;
-		ft_checkmove(keycode, vars);
-		ft_draw_tile(vars, vars->x, vars->y, "./sprites/snekLeft.xpm");
-	}
-	else if (keycode == 2)
-	{	
-		vars->x += 1;
-		ft_checkmove(keycode, vars);
-		ft_draw_tile(vars, vars->x, vars->y, "./sprites/snekRight.xpm");
-	}
-	else if (keycode == 13)
-	{
-		vars->y -= 1;
-		ft_checkmove(keycode, vars);
-		ft_draw_tile(vars, vars->x, vars->y, "./sprites/snekUp.xpm");
-	}
-	else if (keycode == 1)
-	{
-		vars->y += 1;
-		ft_checkmove(keycode, vars);
-		ft_draw_tile(vars, vars->x, vars->y, "./sprites/snekDown.xpm");
-	}
+	t_snake	*last;
+
+	ft_checkmove(keycode, vars);
+	last = ft_lstlast(vars->snake);
+	ft_draw_tile(vars, last->x, last->y, "sprites/floor_tile.xpm");
+	vars->map[last->y][last->x] = '0';
+	if (vars->flag == 0)
+		ft_move_snake(vars);
+	else
+		ft_move_snake_flag(vars);
+	ft_paint_snake(keycode, vars);
 }
