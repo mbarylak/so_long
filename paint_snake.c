@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:50:11 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/22 21:22:23 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:53:44 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ void	ft_checkmove1( t_vars *vars)
 {
 	if (vars->map[vars->y][vars->x] == '1' || (vars->map[vars->y][vars->x] == \
 				'E' && ft_exit(vars) == 0))
-		ft_error(1);
+		ft_error(1, vars);
 	else if (vars->map[vars->y][vars->x] == 'C')
 	{
 		vars->snake = ft_grow_snake(vars->snake);
 		vars->map[vars->y][vars->x] = '0';
 		vars->apple -= 1;
 		vars->flag = 1;
+		vars->s_count += 1;
 		if (vars->apple == 0)
 			ft_opendagates(vars);
 	}
 	else if (vars->map[vars->y][vars->x] == 'B')
-		ft_error(1);
+		ft_error(1, vars);
 	else
 		vars->flag = 0;
 }

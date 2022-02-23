@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:51:55 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/22 21:04:46 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:44:04 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_checkmap1(t_vars *vars)
 			if (vars->map[j][i] != '1' && vars->map[j][i] != '0' && \
 					vars->map[j][i] != 'P' && vars->map[j][i] != 'E' && \
 					vars->map[j][i] != 'C')
-				ft_error(0);
+				ft_error(0, vars);
 			i++;
 		}
 		j++;
@@ -57,8 +57,8 @@ void	ft_checkmap2(t_vars *vars, int p)
 				vars->apple += 1;
 		}
 	}
-	if (e <= 0 || vars->apple <= 0 || p <= 0 || p > 1)
-		ft_error(0);
+	if (e <= 0 || vars->apple <= 0 || p != 1)
+		ft_error(0, vars);
 }
 
 void	ft_checkmap3(t_vars *vars)
@@ -73,16 +73,16 @@ void	ft_checkmap3(t_vars *vars)
 		while (++i < vars->width)
 		{
 			if (vars->map[0][i] != '1')
-				ft_error(0);
+				ft_error(0, vars);
 		}
 		if (vars->map[j][0] != '1' || vars->map[j][vars->width -1] != '1')
-			ft_error(0);
+			ft_error(0, vars);
 	}
 	i = -1;
 	while (vars->map[vars->height - 1][++i] != '\n')
 	{
 		if (vars->map[vars->height - 1][i] != '1')
-			ft_error(0);
+			ft_error(0, vars);
 	}
 }
 
@@ -96,7 +96,7 @@ void	ft_checkmap4(t_vars *vars)
 	if (vars->map[j - 1][i - 1] == '1' && vars->map[j - 1][i] == '1' \
 			&& vars->map[j][i - 1] == '1' && vars->map[j + 1][i] == '1' \
 			&& vars->map[j][i + 1] == '1' && vars->map[j + 1][i + 1] == '1')
-		ft_error(0);
+		ft_error(0, vars);
 }
 
 void	ft_checkmap(t_vars *vars)
@@ -107,5 +107,6 @@ void	ft_checkmap(t_vars *vars)
 		ft_checkmap2(vars, 0);
 		ft_checkmap3(vars);
 		ft_checkmap4(vars);
+		ft_checkmap5(vars);
 	}
 }

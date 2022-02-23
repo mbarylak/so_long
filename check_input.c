@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstutils.c                                         :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 20:41:40 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/23 17:16:03 by mbarylak         ###   ########.fr       */
+/*   Created: 2022/02/23 19:44:13 by mbarylak          #+#    #+#             */
+/*   Updated: 2022/02/23 20:20:04 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_snake	*ft_lstlast(t_snake *snake)
+int	ft_checkinput(const char *argv)
 {
-	if (!snake)
-		return (NULL);
-	while (snake->next != NULL)
-		snake = snake->next;
-	return (snake);
-}
+	int	i;
 
-void	ft_lstadd_back(t_snake **snake, t_snake *new)
-{
-	if (*snake)
-		ft_lstlast(*snake)->next = new;
-	else
-		*snake = new;
-}
-
-void	ft_swap(size_t *x, size_t *y, size_t *i, size_t *j)
-{
-	size_t	aux;
-
-	aux = *x;
-	*x = *i;
-	*i = aux;
-	aux = *y;
-	*y = *j;
-	*j = aux;
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] == '.' && argv[i + 1] == 'b' && argv[i + 2] == 'e' \
+				&& argv[i + 3] == 'r')
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -6,27 +6,30 @@
 #    By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 17:07:28 by mbarylak          #+#    #+#              #
-#    Updated: 2022/02/22 19:27:15 by mbarylak         ###   ########.fr        #
+#    Updated: 2022/02/23 20:11:49 by mbarylak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 SRCS = make_map.c ./gnl/get_next_line.c so_long.c movement.c press_key.c \
-	   check_map.c lstutils.c paint_snake.c
+	   check_map.c lstutils.c paint_snake.c check_map2.c check_input.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 MINILIB = -L mlx -l mlx -framework OpenGL -framework AppKit
 RM = rm -rf
 
 all: ${NAME}
 
+.o: .c
+	$(CC) $(CFLAGS) -c $< -o $@ 
+
 $(NAME): $(OBJS)
 	
-	$(CC)  $(OBJS) $(MINILIB) -o $(NAME)
+	$(CC)  $(OBJS)  -o $(NAME) $(MINILIB)
 
 clean:
 	$(RM) $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:40:59 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/22 21:22:34 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:33:48 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,11 @@ void	ft_move_snake(t_vars *vars)
 	while (vars->snake != NULL)
 	{
 		if (vars->snake->prev != NULL)
-		{
 			ft_swap(&vars->snake->x, &vars->snake->y, &i, &j);
-			//vars->snake->x = vars->snake->prev->x;
-			//vars->snake->y = vars->snake->prev->y;
-		}
 		else
 		{
 			i = vars->snake->x;
-			j = vars->snake->y;	
+			j = vars->snake->y;
 		}
 		vars->snake = vars->snake->next;
 	}
@@ -78,11 +74,7 @@ void	ft_move_snake_flag(t_vars *vars)
 	while (vars->snake->next != NULL)
 	{
 		if (vars->snake->prev != NULL)
-		{
 			ft_swap(&vars->snake->x, &vars->snake->y, &i, &j);
-			//vars->snake->x = vars->snake->prev->x;
-			//vars->snake->y = vars->snake->prev->y;
-		}
 		else
 		{
 			i = vars->snake->x;

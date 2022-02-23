@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:38:01 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/22 18:03:28 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:20:06 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vars	*ft_get_info(char *file, t_vars *vars)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+		ft_error(2, vars);
 	line = get_next_line(fd);
 	if (line == NULL)
 		return (NULL);

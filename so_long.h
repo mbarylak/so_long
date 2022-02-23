@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 20:19:03 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/22 21:17:34 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/23 20:12:17 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_vars
 	size_t			height;
 	size_t			width;
 	size_t			apple;
+	size_t			s_count;
 }	t_vars;
 
 /* Map Tools */
@@ -69,14 +70,16 @@ void	ft_paint_snake(int keycode, t_vars *vars);
 
 void	ft_free(t_vars *vars);
 void	ft_freedom(char **map);
-int		ft_closed(void);
+int		ft_closed(t_vars *vars);
 int		ft_exit(t_vars *vars);
-void	ft_error(int n);
+void	ft_error(int n, t_vars *vars);
 void	ft_checkmap1(t_vars *vars);
 void	ft_checkmap2(t_vars *vars, int p);
 void	ft_checkmap3(t_vars *vars);
 void	ft_checkmap4(t_vars *vars);
+void	ft_checkmap5(t_vars *vars);
 void	ft_checkmap(t_vars *vars);
+int		ft_checkinput(const char *argv);
 
 /* Lst Utils */
 
