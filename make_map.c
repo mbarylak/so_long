@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:38:01 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/23 20:20:06 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/25 17:26:52 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_vars	*ft_get_info(char *file, t_vars *vars)
 		vars->height++;
 	}
 	close(fd);
+	if (vars->width <= 1 || vars->height <= 1)
+		ft_error(0, vars);
 	return (vars);
 }
 

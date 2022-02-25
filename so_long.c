@@ -6,7 +6,7 @@
 /*   By: mbarylak <mbarylak@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:50:17 by mbarylak          #+#    #+#             */
-/*   Updated: 2022/02/23 20:18:47 by mbarylak         ###   ########.fr       */
+/*   Updated: 2022/02/25 17:28:37 by mbarylak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,16 @@ t_vars	*ft_init(void)
 	return (vars);
 }
 
-void	leak(void)
-{
-	system("leaks so_long");
-}
-
 int	main(int argc, char **argv)
 {
 	t_vars	*vars;
 	int		w;
 	int		h;
 
-	atexit(leak);
 	vars = ft_init();
 	vars->mlx = mlx_init();
 	if (argc != 2 || ft_checkinput(argv[1]) != 1)
-		ft_error(2, vars);;
+		ft_error(2, vars);
 	vars = ft_get_info(argv[1], vars);
 	ft_make_map(argv[1], vars);
 	ft_checkmap(vars);
